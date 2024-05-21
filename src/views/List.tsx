@@ -5,6 +5,7 @@ import PokeCard from "../component/PokeCard";
 import { PokeContext } from "../context/Context";
 import { fetchPokemon } from "../feature/pokemon/pokemonSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Pagination } from "@mantine/core";
 
 const List = () => {
   const { pokeSearch }: any = useContext(PokeContext);
@@ -36,6 +37,8 @@ const List = () => {
             ?.map((pokemon: PokeMonDetail) => {
               return <PokeCard key={pokemon.name} poke={pokemon} />;
             })}
+
+          <Pagination total={0} />
         </div>
       )}
     </div>

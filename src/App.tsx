@@ -1,9 +1,11 @@
+import { MantineProvider } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./component/Layout";
 import { PokeContext, ThemeContext } from "./context/Context";
 import Home from "./views/Home";
+
 import List from "./views/List";
 const App = () => {
   const [pokeSearch, setPokeSearch] = useState<string>("");
@@ -25,17 +27,19 @@ const App = () => {
     >
       <Router>
         <ThemeContext.Provider value={{ pokeTheme, setPokeTheme }}>
-          <QueryClientProvider client={queryClient}>
-            <PokeContext.Provider value={{ pokeSearch, setPokeSearch }}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="/listview"
-                  element={<Layout childComp={<List />} />}
-                />
-              </Routes>
-            </PokeContext.Provider>
-          </QueryClientProvider>
+          <MantineProvider>
+            <QueryClientProvider client={queryClient}>
+              <PokeContext.Provider value={{ pokeSearch, setPokeSearch }}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route
+                    path="/listview"
+                    element={<Layout childComp={<List />} />}
+                  />
+                </Routes>
+              </PokeContext.Provider>
+            </QueryClientProvider>
+          </MantineProvider>
         </ThemeContext.Provider>
       </Router>
     </div>

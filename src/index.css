@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-white;
+  }
   :root {
     --primary: rgb(232, 83, 130);
   }
