@@ -44,7 +44,7 @@ const List = () => {
               if (pokeSearch === "") {
                 return <PokeCard key={pokemon.name} poke={pokemon} />;
               } else if (
-                pokemon.name.toLowerCase().includes(pokeSearch.toLowerCase())
+                pokemon?.name?.toLowerCase()?.includes(pokeSearch.toLowerCase())
               ) {
                 return true;
               }

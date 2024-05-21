@@ -10,7 +10,6 @@ import {
 import Layout from "./component/Layout";
 import { PokeContext, ThemeContext } from "./context/Context";
 import Home from "./views/Home";
-
 import List from "./views/List";
 const App = () => {
   const [pokeSearch, setPokeSearch] = useState<string>("");
