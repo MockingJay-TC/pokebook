@@ -28,7 +28,7 @@ const List = () => {
     queryFn: () =>
       pokemonService.getPokemons({
         limit: limit,
-        offSet: (pageNumber - 1) * limit,
+        offset: (pageNumber - 1) * limit,
       }),
     enabled: true,
     onSuccess: (data) => {

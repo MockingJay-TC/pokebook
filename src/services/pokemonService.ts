@@ -3,7 +3,7 @@ import { PokeMon } from "../Interfaces/interfaces";
 export const pokemonService = {
   getPokemons: async (query: any) => {
     const response = await axios.get(
-      `${import.meta.env.VITE_POKEAPI}/pokemon`,
+      `${import.meta.env.VITE_POKEAPI}/pokemon/`,
       {
         params: query,
       }
