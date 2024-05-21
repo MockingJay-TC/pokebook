@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
 import { ThemeContext } from "../context/Context";
 
 const ThemeModal = ({ open, setOpen }: { open: boolean; setOpen: any }) => {
-  const { setPokeTheme } = useContext(ThemeContext);
+  const { setPokeTheme }: any = useContext(ThemeContext);
 
   const getTheme = (value: string) => {
     setPokeTheme(value);

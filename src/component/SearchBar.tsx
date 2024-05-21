@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { PokeContext } from "../context/Context";
 import { useContext, useState } from "react";
@@ -5,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [search, setSearch] = useState<string>("");
-  const { setPokeSearch } = useContext(PokeContext);
+  const { setPokeSearch }: any = useContext(PokeContext);
   const navigate = useNavigate();
 
   const getPoke = (value: string) => {

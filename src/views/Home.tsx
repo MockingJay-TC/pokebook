@@ -8,7 +8,7 @@ const Home = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchAllPokemons());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-screen h-screen flex justify-center items-center relative px-8 py-8">

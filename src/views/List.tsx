@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PokeMonDetail } from "../Interfaces/interfaces";
 import PokeCard from "../component/PokeCard";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
@@ -6,7 +7,7 @@ import { fetchPokemon } from "../feature/pokemon/pokemonSlice";
 import { PokeContext } from "../context/Context";
 
 const List = () => {
-  const { pokeSearch }: string = useContext(PokeContext);
+  const { pokeSearch }: any = useContext(PokeContext);
   const dispatch = useAppDispatch();
   const { pokemons, loading } = useAppSelector((state) => state.pokemons);
   useEffect(() => {

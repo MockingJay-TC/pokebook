@@ -53,7 +53,7 @@ const pokemonSlice = createSlice({
     });
     builder.addCase(fetchPokemon.fulfilled, (state, action) => {
       state.loading = false;
-      state.pokemon = action.payload;
+      state.pokemons = action.payload;
       state.error = "";
     });
   },
