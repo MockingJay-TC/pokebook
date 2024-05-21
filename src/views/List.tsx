@@ -22,7 +22,6 @@ const List = () => {
         <div>LOADING....</div>
       ) : (
         <div className="flex flex-col gap-y-16 md:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 md:gap-x-8  2xl:gap-y-20">
-          {JSON.stringify(pokemons)}
           {pokemons
             ?.filter((pokemon: PokeMonDetail) => {
               if (pokeSearch === "") {
