@@ -1,45 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Pagination, Select } from "@mantine/core";
+import { Select } from "@mantine/core";
 import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { PokeMon, PokeMonDetail } from "../Interfaces/interfaces";
+import Pagination from "../component/Pagination";
 import PokeCard from "../component/PokeCard";
-import { PokeContext, ThemeContext } from "../context/Context";
+import { PokeContext } from "../context/Context";
 import { pokemonService } from "../services/pokemonService";
 
 const List = () => {
-  const { pokeTheme }: any = useContext(ThemeContext);
-
-  const [pageNumber, setPageNumber] = useState<number>(0);
-  const [pageSelector, setPageSelector] = useState<string | null>("8");
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(8);
 
   const { pokeSearch }: any = useContext(PokeContext);
   const [pokemons, setPokemons] = useState<PokeMon[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const handlePrevClick = () => {
+    setPageNumber((prevPage) => Math.max(prevPage - 1, 1));
+  };
+  const handleNextClick = () => {
+    setPageNumber((prevPage) => prevPage + 1);
+  };
+
   const getPokemon = useQuery({
-    queryKey: ["get-pokemons", pageNumber, pageSelector],
+    queryKey: ["get-pokemons", pageNumber, limit],
     queryFn: () =>
       pokemonService.getPokemons({
-        limit: pageSelector,
+        limit: limit,
+        offSet: (pageNumber - 1) * limit,
       }),
     enabled: true,
     onSuccess: (data) => {
       setPokemons(data.results);
     },
-    refetchOnMount: "always",
-    retryOnMount: true,
+    keepPreviousData: false,
   });
 
   const getAllPokemon = useQuery({
-    queryKey: ["get-all-pokemons", pageNumber, pageSelector, pokemons],
+    queryKey: ["get-all-pokemons", pokemons],
     queryFn: () => pokemonService.getPokemon(pokemons),
     enabled: true,
     onSuccess: () => {
       setLoading(false);
     },
-    refetchOnMount: "always",
-    retryOnMount: true,
+
+    keepPreviousData: false,
   });
 
   getPokemon;
@@ -69,19 +75,19 @@ const List = () => {
       )}
       <div className="flex justify-between my-16">
         <Pagination
-          color={pokeTheme}
-          total={getPokemon?.data?.count}
-          value={pageNumber + 1}
-          onChange={(prevPageNumber) => setPageNumber(prevPageNumber - 1)}
+          page={pageNumber}
+          handlePrevClick={handlePrevClick}
+          handleNextClick={handleNextClick}
         />
-
         <Select
           name="pageSelector"
           data={["8", "12", "16", "24"]}
           clearable
-          defaultValue={pageSelector}
+          defaultValue={limit.toString()}
           clearButtonProps={{ "aria-label": "Clear selection" }}
-          onChange={(value) => setPageSelector(value)}
+          onChange={(value) => {
+            if (value !== null) setLimit(parseInt(value));
+          }}
         />
       </div>
     </div>

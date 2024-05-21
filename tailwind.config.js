@@ -42,7 +42,7 @@ export default {
         "4xl": "2200px",
       },
       backgroundImage: {
-        noise: "url('assets/images/noise.svg')",
+        noise: "url('/noise.svg')",
       },
     },
     fontFamily: {

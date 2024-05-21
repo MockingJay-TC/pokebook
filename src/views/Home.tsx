@@ -2,11 +2,6 @@ import { Link } from "react-router-dom";
 import SearchBar from "../component/SearchBar";
 
 const Home = () => {
-  // const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchAllPokemons());
-  // }, [dispatch]);
-
   return (
     <div className="w-screen h-screen flex justify-center items-center relative px-8 py-8">
       <div className="absolute w-screen h-screen inset-0 bg-noise opacity-5 -z-20" />
