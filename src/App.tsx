@@ -1,7 +1,12 @@
 import { MantineProvider } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Outlet,
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Layout from "./component/Layout";
 import { PokeContext, ThemeContext } from "./context/Context";
 import Home from "./views/Home";
@@ -14,6 +19,29 @@ const App = () => {
     setPokeTheme(pokeTheme);
   }, [pokeTheme, setPokeTheme]);
 
+  const routes: RouteObject[] = [
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/listview",
+      element: (
+        <Layout>
+          <Outlet />
+        </Layout>
+      ),
+      children: [
+        {
+          path: "/listview",
+          element: <List />,
+        },
+      ],
+    },
+  ];
+
+  const router = createBrowserRouter(routes);
+
   const queryClient = new QueryClient();
   return (
     <div
@@ -25,23 +53,15 @@ const App = () => {
           : "theme"
       }
     >
-      <Router>
-        <ThemeContext.Provider value={{ pokeTheme, setPokeTheme }}>
-          <MantineProvider>
-            <QueryClientProvider client={queryClient}>
-              <PokeContext.Provider value={{ pokeSearch, setPokeSearch }}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route
-                    path="/listview"
-                    element={<Layout childComp={<List />} />}
-                  />
-                </Routes>
-              </PokeContext.Provider>
-            </QueryClientProvider>
-          </MantineProvider>
-        </ThemeContext.Provider>
-      </Router>
+      <ThemeContext.Provider value={{ pokeTheme, setPokeTheme }}>
+        <MantineProvider>
+          <QueryClientProvider client={queryClient}>
+            <PokeContext.Provider value={{ pokeSearch, setPokeSearch }}>
+              <RouterProvider router={router} />
+            </PokeContext.Provider>
+          </QueryClientProvider>
+        </MantineProvider>
+      </ThemeContext.Provider>
     </div>
   );
 };

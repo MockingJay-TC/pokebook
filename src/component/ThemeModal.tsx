@@ -24,9 +24,9 @@ const ThemeModal = ({ open, setOpen }: { open: boolean; setOpen: any }) => {
               <h3 className="flex items-center justify-center text-center font-clash font-semibold text-2xl py-4">
                 Choose Theme
               </h3>
-              <div className="flex items-center justify-center gap-4  bg-black/20 py-12">
+              <div className="flex items-center justify-center gap-4  bg-black/20 py-12 bg">
                 <div
-                  onClick={() => getTheme("")}
+                  onClick={() => getTheme("pink")}
                   className="border-gray border rounded-full flex items-center justify-center cursor-pointer"
                 >
                   <div className="bg-primary w-16 h-16 m-1 rounded-full" />

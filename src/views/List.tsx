@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { PokeMonDetail } from "../Interfaces/interfaces";
 import PokeCard from "../component/PokeCard";
-import { PokeContext } from "../context/Context";
+import { PokeContext, ThemeContext } from "../context/Context";
 import { fetchPokemon } from "../feature/pokemon/pokemonSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Pagination, Select } from "@mantine/core";
@@ -10,6 +10,8 @@ import { pokemonService } from "../services/pokemonService";
 import { useQuery } from "react-query";
 
 const List = () => {
+  const { pokeTheme }: any = useContext(ThemeContext);
+
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [, setPageSelector] = useState<string | null>("");
 
@@ -18,7 +20,7 @@ const List = () => {
   const { pokemons, loading } = useAppSelector((state) => state.pokemons);
   useEffect(() => {
     dispatch(fetchPokemon(pokemons));
-  }, [dispatch, pokemons]);
+  }, [dispatch, pokemons, pokeTheme]);
 
   const getPokemon = useQuery({
     queryKey: ["get-pokemons"],
@@ -53,8 +55,9 @@ const List = () => {
             })}
         </div>
       )}
-      <div className="flex justify-between ">
+      <div className="flex justify-between my-16">
         <Pagination
+          color={pokeTheme}
           total={getPokemon?.data?.count}
           value={pageNumber + 1}
           onChange={(prevPageNumber) => setPageNumber(prevPageNumber - 1)}
