@@ -1,7 +1,12 @@
-import axios from 'axios'
+import axios from "axios";
 export const pokemonService = {
-    getPokemons: async () => {
-        const response = await axios.get(`${import.meta.env.VITE_POKEAPI}/pokemon`);
-        return response.data;
-    }
-}
+  getPokemons: async (query: any) => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_POKEAPI}/pokemon`,
+      {
+        params: query,
+      }
+    );
+    return response.data;
+  },
+};

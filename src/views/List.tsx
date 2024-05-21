@@ -13,18 +13,21 @@ const List = () => {
   const { pokeTheme }: any = useContext(ThemeContext);
 
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const [, setPageSelector] = useState<string | null>("");
+  const [pageSelector, setPageSelector] = useState<string | null>("");
 
   const { pokeSearch }: any = useContext(PokeContext);
   const dispatch = useAppDispatch();
   const { pokemons, loading } = useAppSelector((state) => state.pokemons);
   useEffect(() => {
     dispatch(fetchPokemon(pokemons));
-  }, [dispatch, pokemons, pokeTheme]);
+  }, [pokeTheme]);
 
   const getPokemon = useQuery({
-    queryKey: ["get-pokemons"],
-    queryFn: () => pokemonService.getPokemons(),
+    queryKey: ["get-pokemons", pageNumber, pageSelector],
+    queryFn: () =>
+      pokemonService.getPokemons({
+        limit: pageSelector,
+      }),
     enabled: true,
     onSuccess: () => {},
     refetchOnMount: "always",
