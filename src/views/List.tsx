@@ -11,7 +11,7 @@ const List = () => {
   const { pokeTheme }: any = useContext(ThemeContext);
 
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const [pageSelector, setPageSelector] = useState<string | null>("");
+  const [pageSelector, setPageSelector] = useState<string | null>("8");
 
   const { pokeSearch }: any = useContext(PokeContext);
   const [pokemons, setPokemons] = useState<PokeMon[]>([]);
@@ -79,7 +79,7 @@ const List = () => {
           name="pageSelector"
           data={["8", "12", "16", "24"]}
           clearable
-          defaultValue={"8"}
+          defaultValue={pageSelector}
           clearButtonProps={{ "aria-label": "Clear selection" }}
           onChange={(value) => setPageSelector(value)}
         />
