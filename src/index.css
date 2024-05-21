@@ -6,11 +6,11 @@
   :root {
     --primary: rgb(232, 83, 130);
   }
-  .theme-blue {
-    --primary: rgb(57, 186, 223);
-  }
   .theme-yellow {
     --primary: rgb(225, 167, 37);
+  }
+  .theme-blue {
+    --primary: rgb(57, 186, 223);
   }
 }
 

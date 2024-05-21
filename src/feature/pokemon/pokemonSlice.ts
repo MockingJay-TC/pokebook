@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PokeMonDetail, PokemonState } from "../../Interfaces/interfaces";
 
@@ -17,12 +17,14 @@ export const fetchAllPokemons = createAsyncThunk(
   }
 );
 
+
+
 export const fetchPokemon = createAsyncThunk(
   "pokemon/fetchPokemon",
   async (pokemons: PokeMonDetail[], { rejectWithValue }) => {
     try {
       const objects = await Promise.all(
-        pokemons.map((pokemon) =>
+        pokemons?.map((pokemon) =>
           axios.get(`${pokemon.url}`).then((response) => response.data)
         )
       );
