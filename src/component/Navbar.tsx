@@ -5,7 +5,7 @@ import ThemeModal from "./ThemeModal";
 import { PokeContext } from "../context/Context";
 
 const Navbar = () => {
-  const { setPokeSearch } = useContext(PokeContext);
+  const { pokeSearch,setPokeSearch } = useContext(PokeContext);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -35,7 +35,9 @@ const Navbar = () => {
         <div className="navSearch">
           <MagnifyingGlassIcon className="lg:w-5 w-3 text-g100 mr-4 cursor-pointer" />
           <input
+            name="pokeSearch"
             type="text"
+            value={pokeSearch}
             onChange={(event) => setPokeSearch(event?.target.value)}
             placeholder="Enter pokeman name"
             className="lg:text-lg w-4/5 text-sm lg:w-3/4 py-2 focus:outline-none"
