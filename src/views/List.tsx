@@ -11,7 +11,7 @@ import { useQuery } from "react-query";
 
 const List = () => {
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const [pageSelector, setPageSelector] = useState<number>(0);
+  const [, setPageSelector] = useState<string | null>("");
 
   const { pokeSearch }: any = useContext(PokeContext);
   const dispatch = useAppDispatch();
@@ -58,7 +58,6 @@ const List = () => {
           total={getPokemon?.data?.count}
           value={pageNumber + 1}
           onChange={(prevPageNumber) => setPageNumber(prevPageNumber - 1)}
-          defaultValue={pageSelector}
         />
 
         <Select
@@ -67,7 +66,7 @@ const List = () => {
           clearable
           defaultValue={"8"}
           clearButtonProps={{ "aria-label": "Clear selection" }}
-          onChange={(value) => setPageSelector(parseInt(value))}
+          onChange={(value) => setPageSelector(value)}
         />
       </div>
     </div>
